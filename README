@@ -1,0 +1,14 @@
+If you run local dev_appserver the code runs fine but as soon as you change the code (add or remove whitespace) it will raise an error on get_namespace().
+
+The code throwing the error is in appengine_config.py
+
+Traceback (most recent call last):
+  File "/home/fs/work/google_appengine/google/appengine/ext/webapp/__init__.py", line 511, in __call__
+    handler.get(*groups)
+  File "/home/fs/work/gaecode/namespace_bug/main.py", line 7, in get
+    namespace = namespace_manager.get_namespace()
+  File "/home/fs/work/google_appengine/google/appengine/api/namespace_manager/namespace_manager.py", line 72, in get_namespace
+    name = _config.default_namespace_for_request()
+  File "/home/fs/work/gaecode/namespace_bug/appengine_config.py", line 4, in namespace_manager_default_namespace_for_request
+    user = get_current_user()
+TypeError: 'NoneType' object is not callable
